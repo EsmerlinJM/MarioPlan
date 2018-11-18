@@ -16,12 +16,13 @@ const postReducer = (state = initState, action) => {
     switch (action.type) {
         case 'CREATE_POST':
             console.log('created post', action.post);
-            break;
-    
+            return state
+        case 'CREATE_POST_ERROR': 
+            console.log('create error error', action.err);
+            return state    
         default:
-            break;
+            return state
     }
-    return state
 }
 
 export default postReducer
