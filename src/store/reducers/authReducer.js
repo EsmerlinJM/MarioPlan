@@ -1,4 +1,6 @@
-const initState = {}
+const initState = {
+    authError: null
+}
 
 /**
  * Return reducer with auth properties.
@@ -7,7 +9,26 @@ const initState = {}
  * @param {*} action 
  */
 const authReducer = (state = initState, action) => {
-    return state
+    switch (action.type) {
+        case 'LOGIN_ERROR':
+            console.log('login failed')
+            return {
+                ...state,
+                authError: 'Login failed'
+            }
+        case 'LOGIN_SUCCESS':
+            console.log('login success')
+            return {
+                ...state,
+                authError: null
+            }
+        case 'SIGNOUT_SUCCESS':
+            console.log('sign out success');
+            return state    
+                
+        default:
+            return state
+    } 
 }
 
 export default authReducer
