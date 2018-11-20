@@ -1,20 +1,14 @@
-/**
- * Return action on create post
- * @param {*} post 
- * @exports createPost
- */
 export const createPost = (post) => {
     return (dispatch, getState, { getFirebase, getFirestore }) => {
         // make async call to database
-        /**
-         * Get instance of firestore and add post to collection on db
-         */
         const firestore = getFirestore()
+        const profile = getState().firebase.profile
+        const authorId = getState().firebase.auth.uid
         firestore.collection('posts').add({
             ...post,
-            authorFirstName: 'Esmerlin',
-            authorLastName: 'Mieses',
-            authorId: 12345,
+            authorFirstName: profile.firstName,
+            authorLastName: profile.lastName,
+            authorId: authorId,
             createdAt: new Date()
         })
         .then(() => {

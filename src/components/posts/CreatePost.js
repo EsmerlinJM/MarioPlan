@@ -16,6 +16,7 @@ class CreatePost extends Component {
     handleSubmit = (e) => {
         e.preventDefault()
         this.props.createPost(this.state)
+        this.props.history.push('/')
     }
     render() {
         const { auth } = this.props
