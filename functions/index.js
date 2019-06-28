@@ -19,6 +19,7 @@ exports.postCreated = functions.firestore
         const notification = {
             content: 'Added a new post',
             user: `${post.authorFirstName} ${post.authorLastName}`,
+            userId: post.authorId,
             time: admin.firestore.FieldValue.serverTimestamp()
         }
         return createNotification(notification)
@@ -32,9 +33,9 @@ exports.userJoined = functions.auth.user()
                 const notification = {
                     content: 'Joined the party',
                     user: `${newUser.firstName} ${newUser.lastName}`,
+                    userId: user.uid,
                     time: admin.firestore.FieldValue.serverTimestamp()
                 };
                 return createNotification(notification);
             })
-        
 })

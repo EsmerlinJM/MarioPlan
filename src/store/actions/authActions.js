@@ -49,3 +49,24 @@ export const signUp = (newUser) => {
         });
     }
 }
+
+export const signInGoogle = () => {
+    return (dispatch, getState, { getFirebase, getFirestore }) => {
+        const firebase = getFirebase()
+        const firestore = getFirestore()
+        const provider = new firebase.auth.GoogleAuthProvider()
+
+        firebase.auth().signInWithPopup(provider)
+        .then(res => {
+            return firestore.collection('users').doc(res.user.uid).set({
+                firstName: res.user.displayName,
+                lastName: res.user.displayName,
+                initials: res.user.displayName[0] + res.user.displayName[0]
+            })
+        }).then(() => {
+            dispatch({ type:'SIGNIN_GOOGLE_SUCCESS' })
+        }).catch( err => {
+            dispatch({ type:'SIGNIN_GOOGLE_ERR', err })
+        })
+    }
+}

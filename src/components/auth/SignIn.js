@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { signIn } from '../../store/actions/authActions'
+import { signInGoogle } from '../../store/actions/authActions'
 import { Redirect } from 'react-router-dom'
 
 class SignIn extends Component {
@@ -16,6 +17,10 @@ class SignIn extends Component {
     handleSubmit = (e) => {
         e.preventDefault()
         this.props.signIn(this.state)
+    }
+    handleSubmitGoogle = (e) => {
+        e.preventDefault()
+        this.props.signInGoogle()
     }
     render() {
         const { authError, auth } = this.props
@@ -35,6 +40,10 @@ class SignIn extends Component {
                     <div className="input-field">
                         <button className="btn pink lighten-1 z-depth-0">Login</button>
                     </div>
+                    <div className="input-field">
+                        <button onClick={this.handleSubmitGoogle} className="btn waves-effect waves-light red">SIGN IN WITH GOOGLE</button>
+                    </div>
+                    
                     <div className="red-text center">
                         { authError ? <p>{ authError }</p> : null }
                     </div>
@@ -53,7 +62,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        signIn: (creds) => dispatch(signIn(creds))
+        signIn: (creds) => dispatch(signIn(creds)),
+        signInGoogle: () => dispatch(signInGoogle())
     }
 }
 

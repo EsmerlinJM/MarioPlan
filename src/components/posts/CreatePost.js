@@ -27,11 +27,11 @@ class CreatePost extends Component {
                     <h5 className="grey-text text-darken-5">Create New Post</h5>
                     <div className="input-field">
                         <label htmlFor="title">Title</label>
-                        <input type="text" id="title" onChange={this.handleChange}/>
+                        <input type="text" id="title" onChange={this.handleChange} required/>
                     </div>
                     <div className="input-field">
                         <label htmlFor="content">Content</label>
-                        <textarea className="materialize-textarea" id="content" onChange={this.handleChange}></textarea>
+                        <textarea className="materialize-textarea" id="content" onChange={this.handleChange} required></textarea>
                     </div>
                     <div className="input-field">
                         <button className="btn pink lighten-1 z-depth-0">Create</button>
